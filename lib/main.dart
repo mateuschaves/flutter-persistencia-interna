@@ -13,9 +13,10 @@ class BytebankApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.green[900],
         accentColor: Colors.blueAccent[700],
+        appBarTheme: AppBarTheme(color: Colors.green[900]),
         buttonTheme: ButtonThemeData(
-          buttonColor: Colors.blueAccent[700],
-          textTheme: ButtonTextTheme.primary,
+          buttonColor: Colors.greenAccent[700],
+          textTheme: ButtonTextTheme.normal,
         ),
       ),
       home: Dashboard(),
