@@ -1,9 +1,9 @@
+import 'package:bytebank/database/app_database.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ContactForm extends StatefulWidget {
-
   @override
   State<ContactForm> createState() => _ContactFormState();
 }
@@ -16,7 +16,8 @@ class _ContactFormState extends State<ContactForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('New contact'),
+      appBar: AppBar(
+        title: Text('New contact'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -29,9 +30,7 @@ class _ContactFormState extends State<ContactForm> {
                 decoration: InputDecoration(
                   labelText: 'Full name',
                 ),
-                style: TextStyle(
-                  fontSize: 24.0
-                ),
+                style: TextStyle(fontSize: 24.0),
               ),
             ),
             Padding(
@@ -42,9 +41,7 @@ class _ContactFormState extends State<ContactForm> {
                 decoration: InputDecoration(
                   labelText: 'Account number',
                 ),
-                style: TextStyle(
-                  fontSize: 24.0
-                ),
+                style: TextStyle(fontSize: 24.0),
               ),
             ),
             Padding(
@@ -52,16 +49,18 @@ class _ContactFormState extends State<ContactForm> {
               child: SizedBox(
                 width: double.maxFinite,
                 child: ElevatedButton(
-                  onPressed: () {
-                    final String name = _name.text;
-                    final int accountNumber  = int.tryParse(_accountNumber.text);
+                    onPressed: () async {
+                      final String name = _name.text;
+                      final int accountNumber =
+                          int.tryParse(_accountNumber.text);
 
-                    final Contact newContact = Contact(0, name, accountNumber);
+                      final Contact newContact =
+                          Contact(0, name, accountNumber);
 
-                    Navigator.pop(context, newContact);
-                  },
-                  child: Text('Create')
-                ),
+                      await save(newContact);
+                      Navigator.pop(context);
+                    },
+                    child: Text('Create')),
               ),
             )
           ],
